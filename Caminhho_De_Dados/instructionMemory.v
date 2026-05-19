@@ -8,7 +8,7 @@ module instruction_memory (
 
     initial begin
         // O arquivo "nome.txt" deve ter uma instrução de 32 bits por linha
-        $readmemb("nome.txt", rom);
+        $readmemb("nome.txt", rom);//ta errado aqui o o bagulho le byte e bota em 32 bits
     end
 
     // Se o seu PC pula de 4 em 4, você deve usar pc[31:2] para acessar o índice 0, 1, 2...
