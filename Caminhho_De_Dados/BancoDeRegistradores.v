@@ -1,6 +1,6 @@
 module BancoReg(
 input clk,
-input regwrite, memtoreg,
+input regwrite,
 input [4:0] rs1,[4:0] rs2,[4:0] rd,
 input [31:0] write_data, //isso aqui e a saida de algum multiplexador
 output reg [31:0] read1,[31:0] read2
