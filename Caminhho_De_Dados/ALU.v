@@ -1,5 +1,5 @@
 module ALU(
-    input [31:0] rs1,rs2_Imm,
+    input [31:0] read1 , [31:0] read2_Imm,
     input [3:0] alucontrol,
     output [31:0] alusaida
     output zero

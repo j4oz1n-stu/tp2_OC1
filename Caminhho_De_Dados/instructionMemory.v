@@ -4,7 +4,7 @@ module instruction_memory (
 );
     // Agora a memória tem 32 bits de largura (31:0)
     // E vamos definir, por exemplo, 32 posições de profundidade [0:31]
-    reg [31:0] rom [31:0];
+    reg [31:0] rom [0:31];
 
     initial begin
         // O arquivo "nome.txt" deve ter uma instrução de 32 bits por linha
