@@ -13,7 +13,7 @@ module Control(input [6:0] opcode);
         7'b0100011: 
             branch = 1'b0;
             memread = 1'b0;
-            memtoreg = 1'b1;
+            memtoreg = 1'bx;
             aluop = 2'b00;
             memwrite = 1'b1;
             alusrc = 1'b1;
@@ -37,7 +37,7 @@ module Control(input [6:0] opcode);
         7'b1100011: 
             branch = 1'b1;
             memread = 1'b0;
-            memtoreg = 1'b1;
+            memtoreg = 1'bx;
             aluop = 2'b01;
             memwrite = 1'b0;
             alusrc = 1'b0;
