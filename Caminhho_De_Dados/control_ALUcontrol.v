@@ -64,7 +64,7 @@ module Control(input [6:0] opcode,
 endmodule
 
 module ALUControl(
-input [14:12]funct3, funct7_b30, [1:0] aluop;
+input [2:0]funct3, funct7_b30, [1:0] aluop;
 output [3:0] alucontrol;
 );
     assign funct = {aluop,funct3,funct7_b30};
