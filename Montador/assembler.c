@@ -103,13 +103,9 @@ void assembler (char linha[], int output_type, FILE* saida,rotulo rotulos[],int 
         }
         int offset;
         //calcular offset
-        offset = (rotulo_endereco-(*pc));
-
-
-
+        offset = ((rotulo_endereco-(*pc))/2);
         binario(rs1,rs1_bin);
         binario(rs2,rs2_bin);
-        offset = offset >> 1;
         binario_imediato(offset,offset_bin);
         char bit12 = offset_bin[0];char bit11 = offset_bin[1];
         char bits10_5[7];char bits4_1[5];

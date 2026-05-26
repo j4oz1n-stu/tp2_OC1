@@ -41,7 +41,7 @@ module testbench;
         reset = 0;              
 
         // Executa as instruções
-        repeat(6) begin
+        repeat(100) begin
             @(posedge clk); #1;
         end
 
