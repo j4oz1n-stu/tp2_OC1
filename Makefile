@@ -8,7 +8,7 @@ compilar-v:
 	iverilog -g2012 -IDataPath -IDataPath/modules -o DataPath/simulador DataPath/testbench.v
 
 run-v: compilar-v
-	vvp DataPath/simulador
+	vvp DataPath/simulacao/simulador
 
 wave:
 	gtkwave DataPath/simulacao.vcd &
