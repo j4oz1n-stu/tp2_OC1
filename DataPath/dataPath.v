@@ -47,6 +47,7 @@ module data_path (
     wire [31:0] read_1, read_2;
     BancoReg banco_de_registradores (
         .clk       (clk),
+        .reset     (reset), 
         .regwrite  (regwrite),
         .rs1       (instruction[19:15]),
         .rs2       (instruction[24:20]),
@@ -107,7 +108,7 @@ module data_path (
     multiplexador mux_memtoreg (
         .control(memtoreg),
         .input1(alusaida),      // 0 = resultado da ALU (tipo R, ori)
-        .input2(memread_value), // 1 = dado lido da memória (lb)
+        .input2(memread_valor), // 1 = dado lido da memória (lb)
         .saida(write_data)
     );
 

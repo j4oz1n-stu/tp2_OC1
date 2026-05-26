@@ -9,7 +9,7 @@ module instruction_memory (
     initial begin
         // CORREÇÃO: Nome do arquivo corrigido para um padrão claro.
         // O arquivo deve ter uma instrução de 32 bits por linha, em binário.
-        $readmemb("instrucoes.txt", rom);
+        $readmemb("memorias/instrucoes.txt", rom);
     end
 
     // PC vem em bytes (0, 4, 8...), dividimos por 4 para acessar índice (0, 1, 2...)

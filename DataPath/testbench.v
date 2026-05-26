@@ -1,4 +1,14 @@
-
+// =============================================================================
+// Testbench: RISC-V Grupo 4
+//
+// Programa de teste (4 instruções):
+//   PC=0:  beq  x1, x0, -2    → x1≠0 → NÃO desvia, vai para PC=4
+//   PC=4:  sub  x5, x5, x6    → x5 = x5 - x6
+//   PC=8:  and  x7, x8, x9    → x7 = x8 & x9
+//   PC=12: srl  x10, x11, x12 → x10 = x11 >> x12
+//
+// Para rodar: make sim
+// =============================================================================
 
 `timescale 1ns/1ps
 `include "dataPath.v"
@@ -8,73 +18,37 @@ module testbench;
     reg clk;
     reg reset;
 
-    // Clock com período de 10 ns (5 ns alto, 5 ns baixo)
-    initial clk = 0;
-    always #5 clk = ~clk;
+    // CORREÇÃO: reset já começa em 1 na declaração, antes de qualquer borda
+    // de clock. Isso garante que o PC zera corretamente no primeiro ciclo.
+    initial clk  = 0;
+    initial reset = 1;          // <-- inicia em 1 direto, sem esperar clock
 
+    always #5 clk = ~clk;
 
     data_path dut (
         .clk  (clk),
         .reset(reset)
     );
 
-
-    integer ciclo;
     integer i;
 
     initial begin
-        reset = 1;
-        @(posedge clk); // aguarda 1 ciclo com reset
-        @(posedge clk);
-        reset = 0;
+        // Aguarda a primeira borda para garantir que o PC síncrono vá para 0
+        @(posedge clk); #1;
+        
+        // Libera o reset aqui! Assim, na próxima borda, o PC já poderá
+        // calcular o next_pc (PC + 4) em vez de ficar preso em 0 de novo.
+        reset = 0;              
 
-
-        for (ciclo = 0; ciclo < 30; ciclo = ciclo + 1) begin
-            @(posedge clk);
-
-            // Mostra o PC a cada ciclo para acompanhar a execução
-            $display("Ciclo %0d | PC = %0d | Instrução = %b",
-                     ciclo,
-                     dut.pc,
-                     dut.instruction);
+        // Executa as instruções
+        repeat(6) begin
+            @(posedge clk); #1;
         end
 
-
-        $display("");
-        $display("============================================================");
-        $display("           ESTADO FINAL DOS REGISTRADORES");
-        $display("============================================================");
-
-        for (i = 0; i < 32; i = i + 1) begin
-            $display("Register [ %2d]:    %0d",
-                     i,
-                     dut.banco_de_registradores.regs[i]);
-        end
-
-        $display("============================================================");
-
-
-        $display("");
-        $display("============================================================");
-        $display("           ESTADO DA MEMÓRIA DE DADOS (bytes 0-31)");
-        $display("============================================================");
-
-        for (i = 0; i < 32; i = i + 1) begin
-            $display("Memoria [%3d]:    %0d",
-                     i,
-                     dut.memory_bank.memoria[i]);
-        end
-
-        $display("============================================================");
-        $display("Simulação concluída.");
-
-        $finish; // Encerra a simulação
+        // Imprime os registradores
+        for (i = 0; i < 32; i = i + 1)
+            $display("Register [ %2d]:    %0d", i, dut.banco_de_registradores.regs[i]);
+        $finish;
     end
-
-
-    initial begin
-        $dumpfile("simulacao.vcd");
-        $dumpvars(0, testbench);
-    end
-
+    
 endmodule
