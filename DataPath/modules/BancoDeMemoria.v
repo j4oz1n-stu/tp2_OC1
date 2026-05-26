@@ -11,7 +11,7 @@ module mem (
 
     integer i;
     initial begin
-        $readmemb("memorias/memoria.txt", memoria);
+        $readmemb("DataPath/memorias/memoria.txt", memoria);
     end
 
     always @(*) begin

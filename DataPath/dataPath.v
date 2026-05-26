@@ -1,11 +1,11 @@
-`include "programCounter.v"
-`include "instructionMemory.v"
-`include "control_ALUcontrol.v"
-`include "BancoDeRegistradores.v"
-`include "immGen.v"
-`include "mux.v"
-`include "ALU.v"
-`include "BancoDeMemoria.v"
+`include "modules/programCounter.v"
+`include "modules/instructionMemory.v"
+`include "modules/control_ALUcontrol.v"
+`include "modules/BancoDeRegistradores.v"
+`include "modules/immGen.v"
+`include "modules/mux.v"
+`include "modules/ALU.v"
+`include "modules/BancoDeMemoria.v"
 
 module data_path (
     input clk,   // Clock do processador

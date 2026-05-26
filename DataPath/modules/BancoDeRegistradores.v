@@ -16,7 +16,7 @@ module BancoReg (
     initial begin
         for (i = 0; i < 32; i = i + 1)
             regs[i] = 32'b0;
-        $readmemb("memorias/registradores.txt", regs);
+        $readmemb("DataPath/memorias/registradores.txt", regs);
         // Garante que x0 sempre vale 0
         regs[0] = 32'b0;
     end

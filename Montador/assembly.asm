@@ -6,3 +6,4 @@ lb x4, 0(x3)
 beq x0,x0, loop
 sub x5, x5, x5
 loop:
+sub x5, x5, x12
